@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokeapi_app/repositories/dio_pokemon_respository.dart';
-import '../repositories/pokemon_repository.dart';
+import '../../repositories/pokemon_repository.dart';
 
 
 // Provider for the PokemonRepository
