@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokeapi_app/constants/strings.dart';
 import 'package:pokeapi_app/models/pokemon_model.dart';
 import 'package:pokeapi_app/pages/pokeapi/detail_pokemon_page/detail_pokemon_page.dart';
 import 'package:pokeapi_app/providers/pokemon_providers/pokemon_provider.dart';
@@ -51,7 +52,19 @@ class _ListPokemonPageState extends ConsumerState<ListPokemonPage> {
     final pokemonState = ref.watch(pokemonProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('PokéAPI')),
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: const Text(
+          appTitle,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            letterSpacing: 1.2,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: pokemonState.when(
         data: (pokemonList) => Stack(
           children: [
@@ -106,15 +119,18 @@ class _PokemonListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: FadeInImage.assetNetwork(
-        placeholder: 'assets/placeholder.png', // Ruta de la imagen de marcador de posición
-        image: pokemon.imageUrl,
-        width: 50,
-        height: 50,
-        fit: BoxFit.cover,
-        imageErrorBuilder: (context, error, stackTrace) {
-          return const Icon(Icons.error, color: Colors.red); // Ícono si la imagen falla
-        },
+      leading: Hero(
+        tag: pokemon.imageUrl,
+        child: FadeInImage.assetNetwork(
+          placeholder: 'assets/pokemon_placeholder.jpg',
+          image: pokemon.imageUrl,
+          width: 50,
+          height: 50,
+          fit: BoxFit.cover,
+          imageErrorBuilder: (context, error, stackTrace) {
+            return const Icon(Icons.error, color: Colors.red);
+          },
+        ),
       ),
       title: Text(pokemon.name, style: TextStyle(color: textColor)),
       subtitle: Text(pokemon.types.first, style: TextStyle(color: textColor.withOpacity(0.8))),

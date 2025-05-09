@@ -19,6 +19,14 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   integration_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/pokemon_placeholder.jpg
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.jpg"
