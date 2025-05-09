@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokeapi_app/constants/strings.dart';
 import 'package:pokeapi_app/models/pokemon_model.dart';
 import 'package:pokeapi_app/providers/pokemon_providers/pokemon_description_provider.dart';
 import 'package:pokeapi_app/utils/get_type_colors.dart';
@@ -13,7 +14,6 @@ class DetailPokemonPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bgColor = getTypeColor(pokemon.types.first);
 
-    // Usar el FutureProvider para obtener la descripción
     final descriptionAsyncValue = ref.watch(pokemonDescriptionProvider(pokemon.number));
 
     return Scaffold(
@@ -32,14 +32,14 @@ class DetailPokemonPage extends ConsumerWidget {
       body: Column(
         children: [
           Hero(
-            tag: pokemon.imageUrl,
+            tag: pokemon.imageUrl, 
             child:
             //This Widget need to be replaced for MockNetworkImage when testing 
             Image.network(
               pokemon.imageUrl, 
               height: 180,
               errorBuilder: (context, error, stackTrace) {
-                return const Icon(Icons.error, size: 180); // Muestra un ícono de error si falla la carga
+                return const Icon(Icons.error, size: 180);
               },
             ),
             //  MockNetworkImage(height: 20),
@@ -86,16 +86,16 @@ class DetailPokemonPage extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _StatCard(title: "Weight", value: "${pokemon.weight} kg"),
-                        _StatCard(title: "Height", value: "${pokemon.height} m"),
+                        _StatCard(title: weight, value: "${pokemon.weight} kg"),
+                        _StatCard(title: height, value: "${pokemon.height} m"),
                       ],
                     ),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _StatCard(title: "Category", value: pokemon.category ?? 'N/A'),
-                        _StatCard(title: "Ability", value: pokemon.ability ?? 'N/A'),
+                        _StatCard(title: category, value: pokemon.category ?? 'N/A'),
+                        _StatCard(title: ability, value: pokemon.ability ?? 'N/A'),
                       ],
                     ),
                   ],
@@ -111,7 +111,6 @@ class DetailPokemonPage extends ConsumerWidget {
 
 class _Header extends StatelessWidget {
   const _Header({
-    super.key,
     required this.pokemon,
   });
 
@@ -166,7 +165,7 @@ class _StatCard extends StatelessWidget {
 class MockNetworkImage extends StatelessWidget {
   final double height;
 
-  const MockNetworkImage({required this.height});
+  const MockNetworkImage({super.key, required this.height});
 
   @override
   Widget build(BuildContext context) {
