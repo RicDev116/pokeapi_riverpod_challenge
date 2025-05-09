@@ -17,11 +17,20 @@ Una aplicación Flutter que muestra detalles de Pokémon usando la [PokeAPI](htt
 ### En modo desarrollo
 
 ```bash
+git checkout develop
+git pull origin dev
 flutter pub get
 flutter run
 ```
 
 ### En modo release (producción)
+
+0 ejecuta los soguientes comandos en la terminal 
+```bash
+git checkout main
+git pull origin main
+flutter pub get
+```
 
 1 Asegúrate de tener un archivo key.properties dentro de la carpeta android/:
 
