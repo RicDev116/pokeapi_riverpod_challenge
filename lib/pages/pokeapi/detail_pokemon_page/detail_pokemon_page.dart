@@ -33,7 +33,16 @@ class DetailPokemonPage extends ConsumerWidget {
         children: [
           Hero(
             tag: pokemon.imageUrl,
-            child: Image.network(pokemon.imageUrl, height: 180),
+            child:
+            //This Widget need to be replaced for MockNetworkImage when testing 
+            Image.network(
+              pokemon.imageUrl, 
+              height: 180,
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.error, size: 180); // Muestra un ícono de error si falla la carga
+              },
+            ),
+            //  MockNetworkImage(height: 20),
           ),
           Expanded(
             child: Container(
@@ -47,7 +56,7 @@ class DetailPokemonPage extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Header(pokemon: pokemon),
+                    _Header(pokemon: pokemon),
                     const SizedBox(height: 8),
                     Wrap(
                       spacing: 8,
@@ -100,8 +109,8 @@ class DetailPokemonPage extends ConsumerWidget {
   }
 }
 
-class Header extends StatelessWidget {
-  const Header({
+class _Header extends StatelessWidget {
+  const _Header({
     super.key,
     required this.pokemon,
   });
@@ -150,6 +159,20 @@ class _StatCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class MockNetworkImage extends StatelessWidget {
+  final double height;
+
+  const MockNetworkImage({required this.height});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      color: Colors.grey,
     );
   }
 }
