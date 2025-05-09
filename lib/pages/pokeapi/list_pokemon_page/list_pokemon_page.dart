@@ -106,7 +106,16 @@ class _PokemonListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.network(pokemon.imageUrl),
+      leading: FadeInImage.assetNetwork(
+        placeholder: 'assets/placeholder.png', // Ruta de la imagen de marcador de posición
+        image: pokemon.imageUrl,
+        width: 50,
+        height: 50,
+        fit: BoxFit.cover,
+        imageErrorBuilder: (context, error, stackTrace) {
+          return const Icon(Icons.error, color: Colors.red); // Ícono si la imagen falla
+        },
+      ),
       title: Text(pokemon.name, style: TextStyle(color: textColor)),
       subtitle: Text(pokemon.types.first, style: TextStyle(color: textColor.withOpacity(0.8))),
       trailing: const Icon(Icons.chevron_right,color: Colors.white),
