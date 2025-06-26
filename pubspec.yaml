@@ -1,7 +1,7 @@
 name: pokeapi_app
-description: "A new Flutter project."
+description: "A new Flutter project for PokeAPI with Riverpod and Dio."
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0
 
 environment:
   sdk: ^3.6.0
@@ -17,6 +17,16 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  integration_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/pokemon_placeholder.jpg
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.jpg"
